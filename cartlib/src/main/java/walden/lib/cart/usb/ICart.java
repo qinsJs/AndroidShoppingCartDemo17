@@ -5,17 +5,19 @@ import java.util.List;
 import walden.lib.cart.model.ShopBean;
 
 /**
+ * 购物车意图
+ * <p>
  * Created by next on 17-1-18.
  */
 
-public interface ICart extends ICartShop
+public interface ICart<T extends IServiceBean> extends IShop
 {
 	/**
 	 * 加载商品进购物车
 	 *
 	 * @param shops
 	 */
-	void loadCart(List<ShopBean> shops);
+	void loadCart(List<T> shops);
 
 	/**
 	 * 添加一个商品进购物车
@@ -39,18 +41,23 @@ public interface ICart extends ICartShop
 	List<ShopBean> seeCart();
 
 	/**
+	 * @return
+	 */
+	List<T> seeSourceCart();
+
+	/**
 	 * 商品合计
 	 *
 	 * @return
 	 */
-	double shopCombined();
+	double combined();
 
 	/**
 	 * 计算配送品费用
 	 *
 	 * @return
 	 */
-	double distributionCosts();
+	double fee();
 
 	/**
 	 * 出购物车,去收银台
