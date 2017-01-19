@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@android:color/white"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal">
+
+    <CheckBox
+        android:id="@+id/checks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/radio_button_bg"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <ImageView
+        android:id="@+id/p_img1"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_gravity="center_vertical"
+        android:src="@mipmap/ic_launcher"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/p_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#FF000000"
+            android:text="fdsfdsf"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/p_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFA3C3C"
+                android:textSize="14sp"
+                android:text="¥199.00"/>
+
+            <TextView
+                android:id="@+id/p_mprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="7dp"
+                android:textColor="#FF9B9B9B"
+                android:textSize="10sp"
+                android:text="¥199.00"/>
+
+            <TextView
+                android:id="@+id/p_discount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:background="#FF6EDAED"
+                android:text="5折"/>
+
+            <TextView
+                android:id="@+id/p_news"
+                android:layout_width="wrap_content"
+                android:textSize="10sp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:gravity="center"
+                android:layout_marginLeft="4dp"
+                android:textColor="@android:color/white"
+                android:background="#FF6EDAED"
+                android:layout_height="wrap_content"
+                android:text="九成新"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/p_stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FF9B9B9B"
+                android:textSize="11sp"
+                android:text="库存"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="5dp"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:id="@+id/minus"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@mipmap/btn_minus"/>
+                <TextView
+                    android:id="@+id/p_number"
+                    android:layout_width="23dp"
+                    android:layout_height="32dp"
+                    android:gravity="center"
+                    android:background="#FFF1F1F1"
+                    android:textSize="9sp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:textColor="#FF000000"
+                    android:text="1"/>
+
+                <ImageView
+                    android:id="@+id/add"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@mipmap/btn_plus"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

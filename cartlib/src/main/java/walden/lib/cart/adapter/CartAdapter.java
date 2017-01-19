@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import walden.lib.cart.ShopCart;
 import walden.lib.cart.model.ShopBean;
 import walden.lib.cart.usb.ICart;
 import walden.lib.cart.usb.IServiceBean;
@@ -18,6 +19,17 @@ public abstract class CartAdapter<T extends IServiceBean> extends BaseAdapter im
 {
 	protected Context mContext;
 	protected ICart<T> mCart;
+
+
+	public CartAdapter(Context context, ICart<T> cart)
+	{
+		mContext = context;
+		mCart = cart;
+		if (mCart instanceof ShopCart)
+		{
+			((ShopCart) mCart).setICartAction(this);
+		}
+	}
 
 	@Override
 	public int getCount()

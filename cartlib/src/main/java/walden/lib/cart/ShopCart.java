@@ -62,6 +62,12 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 	}
 
 
+	@Override
+	public void addShop(T b)
+	{
+		addShop(mTransition.toShopBean(b));
+	}
+
 	/**
 	 * 如果商品已经在购物车数量+1
 	 * <p>
@@ -90,6 +96,7 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 		if (mICartAction != null)
 		{
 			mICartAction.onGoodsChange(seeCart());
+			mICartAction.onCombinedChange(combined(),fee());
 		}
 	}
 
@@ -107,6 +114,7 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 		if (ISCA != null)
 		{
 			ISCA.onGoodsChange(seeCart());
+			ISCA.onCombinedChange(combined(),fee());
 		}
 	}
 
@@ -136,6 +144,19 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 				}
 			}
 		}
+		return result;
+	}
+
+	@Override
+	public List<ShopBean> seeJoinShop()
+	{
+		List<ShopBean> result = new ArrayList<>();
+		for (ShopBean bean : shoppingCartOfGoods)
+		{
+			if (bean.isJoin())
+				result.add(bean);
+		}
+
 		return result;
 	}
 
@@ -174,6 +195,8 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 		//1.计算勾选商品
 		//2.计算价格
 		//TODO 还没有想好
+		if (mICartAction != null)
+			mICartAction.onCombinedChange(combined(), fee());
 	}
 
 
@@ -194,6 +217,7 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 		if (mICartAction != null)
 		{
 			mICartAction.onGoodsChange(seeCart());
+			mICartAction.onCombinedChange(combined(),fee());
 		}
 	}
 
@@ -208,6 +232,7 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 		if (ISCA != null)
 		{
 			ISCA.onGoodsChange(seeCart());
+			ISCA.onCombinedChange(combined(),fee());
 		}
 	}
 

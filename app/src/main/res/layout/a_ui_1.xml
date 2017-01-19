@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/activity_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/relativeLayout"
+        android:layout_below="@+id/linearLayout">
+
+        <ListView
+            android:id="@+id/shop_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/all_checks"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:button="@drawable/radio_button_bg"
+            android:text="  全选"
+            android:textColor="#FF000000"
+            android:textSize="16sp"/>
+
+
+        <TextView
+            android:id="@+id/delete_text"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="#FFFA4F4F"
+            android:gravity="center"
+            android:text="删除"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/settlement"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_toLeftOf="@+id/delete_text"
+            android:background="#FFFFB11C"
+            android:gravity="center"
+            android:text="结算"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/prices"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/settlement"
+            android:layout_toStartOf="@+id/settlement"
+            android:gravity="center"
+            android:text="¥0.0"
+            android:textColor="#FFFA4F4F"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/prices"
+            android:layout_toStartOf="@+id/prices"
+            android:gravity="center"
+            android:text="合计:"
+            android:textColor="#FF000000"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="购物车"/>
+    </LinearLayout>
+</RelativeLayout>

@@ -20,6 +20,11 @@ public interface ICart<T extends IServiceBean> extends IShop
 	void loadCart(List<T> shops);
 
 	/**
+	 * @param b
+	 */
+	void addShop(T b);
+
+	/**
 	 * 添加一个商品进购物车
 	 *
 	 * @param shop
@@ -41,9 +46,18 @@ public interface ICart<T extends IServiceBean> extends IShop
 	List<ShopBean> seeCart();
 
 	/**
+	 * 查看服务器数据
+	 *
 	 * @return
 	 */
 	List<T> seeSourceCart();
+
+	/**
+	 * 查看选中的商品
+	 *
+	 * @return
+	 */
+	List<ShopBean> seeJoinShop();
 
 	/**
 	 * 商品合计

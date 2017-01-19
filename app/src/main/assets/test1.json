@@ -1,0 +1,23 @@
+{
+  "Success": true,
+  "Msg": "操作成功",
+  "Data": [
+    {
+      "p_id": "84",
+      "p_name": "拿运费来拿运",
+      "p_brand": "嘿嘿嘿",
+      "p_xinhao": "鱼画江湖",
+      "c_id": "21",
+      "p_price": "0.02",
+      "p_mprice": "100.00",
+      "p_stock": "5",
+      "p_img1": "http://211.152.51.156:8045/Photo/20161123/4d5d1258-2dcb-4f07-a980-080aa85827e1.jpg",
+      "m_id": "1",
+      "m_store": "admin商店",
+      "p_number": "7",
+      "p_discount": "0.00",
+      "p_news": "九成新"
+    }
+  ],
+  "Code": 200
+}
