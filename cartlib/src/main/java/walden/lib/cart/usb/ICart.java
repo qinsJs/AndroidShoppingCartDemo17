@@ -2,7 +2,7 @@ package walden.lib.cart.usb;
 
 import java.util.List;
 
-import walden.lib.cart.model.ShopBean;
+import walden.lib.cart.model.ShopCartModel;
 
 /**
  * 购物车意图
@@ -24,21 +24,15 @@ public interface ICart<T extends IServiceBean> extends IShop
 	 *
 	 * @return
 	 */
-	List<ShopBean> seeCart();
+	List<ShopCartModel> seeCart();
 
-	/**
-	 * 查看服务器数据
-	 *
-	 * @return
-	 */
-	List<T> seeSourceCart();
 
 	/**
 	 * 查看选中的商品
 	 *
 	 * @return
 	 */
-	List<ShopBean> seeJoinShop();
+	List<ShopCartModel> seeJoinShop();
 
 	/**
 	 * 商品合计

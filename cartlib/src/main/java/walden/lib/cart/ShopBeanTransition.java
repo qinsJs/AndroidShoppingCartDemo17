@@ -13,9 +13,9 @@ import walden.lib.cart.usb.IServiceBean;
  * Created by next on 17-1-19.
  */
 
-public class ShopBeanTransition<T extends IServiceBean>
+public class ShopBeanTransition
 {
-	private List<T> sourceData;
+	private List<IServiceBean> sourceData;
 
 	public ShopBeanTransition()
 	{
@@ -26,7 +26,7 @@ public class ShopBeanTransition<T extends IServiceBean>
 	 *
 	 * @return
 	 */
-	public List<ShopCartModel> transition(List<T> sd)
+	public List<ShopCartModel> transition(List<IServiceBean> sd)
 	{
 		this.sourceData = sd;
 
@@ -34,7 +34,7 @@ public class ShopBeanTransition<T extends IServiceBean>
 			throw new NullPointerException(" 转换 源数据 你不能拿空的糊弄我! ");
 
 		List<ShopCartModel> result = new ArrayList<ShopCartModel>();
-		for (T s : sourceData)
+		for (IServiceBean s : sourceData)
 		{
 			ShopBean bean = toShopBean(s);
 			if (bean == null) continue;
@@ -44,12 +44,12 @@ public class ShopBeanTransition<T extends IServiceBean>
 	}
 
 
-	public ShopCartModel toShopCartModel(T source)
+	public ShopCartModel toShopCartModel(IServiceBean source)
 	{
 		return toShopCartModel(toShopBean(source), source);
 	}
 
-	public ShopCartModel toShopCartModel(ShopBean b, T t)
+	public ShopCartModel toShopCartModel(ShopBean b, IServiceBean t)
 	{
 		return new ShopCartModel(b, t);
 	}
@@ -60,7 +60,7 @@ public class ShopBeanTransition<T extends IServiceBean>
 	 * @param source
 	 * @return return null 放弃这个数据
 	 */
-	public ShopBean toShopBean(T source)
+	public ShopBean toShopBean(IServiceBean source)
 	{
 		return new ShopBean(source);
 	}

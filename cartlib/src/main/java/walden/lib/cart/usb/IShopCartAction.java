@@ -2,7 +2,7 @@ package walden.lib.cart.usb;
 
 import java.util.List;
 
-import walden.lib.cart.model.ShopBean;
+import walden.lib.cart.model.ShopCartModel;
 
 /**
  * Created by next on 17-1-19.
@@ -29,7 +29,7 @@ public interface IShopCartAction
 	}
 
 
-	void onGoodsChange(List<ShopBean> shopList);
+	void onGoodsChange(List<ShopCartModel> shopList);
 
 	void onCombinedChange(double combined, double fee);
 

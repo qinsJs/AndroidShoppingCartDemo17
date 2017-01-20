@@ -2,7 +2,7 @@ package walden.lib.cart.usb;
 
 import java.util.Collection;
 
-import walden.lib.cart.model.ShopBean;
+import walden.lib.cart.model.ShopCartModel;
 
 /**
  * 商品操作
@@ -64,5 +64,5 @@ public interface IShop
 	 */
 	void changeShopCount(int count, String id);
 
-	ShopBean getShopBeanById(String id);
+	ShopCartModel getShopBeanById(String id);
 }

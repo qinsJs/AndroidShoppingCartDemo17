@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import walden.lib.cart.model.ShopBean;
 import walden.lib.cart.model.ShopCartModel;
 import walden.lib.cart.usb.ICart;
 import walden.lib.cart.usb.IServiceBean;
@@ -27,7 +26,7 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 	/**
 	 * 数据转换器
 	 */
-	private ShopBeanTransition<T> mTransition;
+	private ShopBeanTransition mTransition;
 
 	/**
 	 * 联动回调
@@ -46,7 +45,7 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 
 	public ShopCart(IShopCartAction iCartAction, List<ShopCartModel> shoppingCartOfGoods)
 	{
-		mTransition = new ShopBeanTransition<T>();
+		mTransition = new ShopBeanTransition();
 		mICartAction = iCartAction;
 		this.shoppingCartOfGoods = shoppingCartOfGoods;
 
@@ -64,41 +63,18 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 
 
 	@Override
-	public void addShop(IServiceBean b)
+	public synchronized void addShop(IServiceBean shop)
 	{
-		addShop(mTransition.toShopBean(b));
+		addShop(mTransition.toShopCartModel(shop), mICartAction);
 	}
 
-	@Override
-	public void cutHand(Collection<IServiceBean> shops)
-	{
 
-	}
-
-	/**
-	 * 如果商品已经在购物车数量+1
-	 * <p>
-	 * 如果没有在购物车,添加进购物车
-	 *
-	 * @param shop
-	 */
 	@Override
-	public synchronized void addShop(ShopBean shop)
+	public synchronized void cutHand(Collection<IServiceBean> shops)
 	{
-		addShop(shop, mICartAction);
-	}
-
-	/**
-	 * 循环使用 {@link #addShop(ShopBean)} 进行数据添加
-	 *
-	 * @param shops
-	 */
-	@Override
-	public synchronized void cutHand(List<ShopBean> shops)
-	{
-		for (ShopBean bean : shops)
+		for (IServiceBean bean : shops)
 		{
-			addShop(bean, null);
+			addShop(mTransition.toShopCartModel(bean), null);
 		}
 		if (mICartAction != null)
 		{
@@ -107,12 +83,21 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 		}
 	}
 
-
-	private synchronized void addShop(ShopBean shop, IShopCartAction ISCA)
+	/**
+	 * 添加商品的真正逻辑代码
+	 * <p>
+	 * 如果商品已经在购物车,找到对应商品 数量+1
+	 * <p>
+	 * 如果没有在购物车,添加进购物车
+	 *
+	 * @param shop 商品数据
+	 * @param ISCA 回调,通知跟新数据
+	 */
+	private synchronized void addShop(ShopCartModel shop, IShopCartAction ISCA)
 	{
-		if (shoppingCartOfGoods.contains(shop))
+		if (existing(shop))
 		{
-			shopAdd(shop.getId());
+			shopAdd(shop.getShop().getId());
 		} else
 		{
 			shoppingCartOfGoods.add(shop);
@@ -125,42 +110,40 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 		}
 	}
 
+	/**
+	 * 判断这个商品在购物车中是否存在
+	 *
+	 * @param shop true 代表已近存在于购物车中
+	 * @return
+	 */
+	private boolean existing(ShopCartModel shop)
+	{
+		if (shoppingCartOfGoods.contains(shop)) return true;//不可靠
+
+		for (ShopCartModel m : shoppingCartOfGoods)
+		{
+			if (m.getShop().getId().equals(shop.getShop().getId()))
+				return true;
+		}
+
+		return false;
+	}
+
 
 	@Override
-	public List<ShopBean> seeCart()
+	public List<ShopCartModel> seeCart()
 	{
 		return shoppingCartOfGoods;
 	}
 
-	@Override
-	public List<T> seeSourceCart()
-	{
-		List<T> result = new ArrayList<>();
-		for (ShopBean bean : shoppingCartOfGoods)
-		{
-			if (bean.getShopId() == null || bean.getShopId().length() == 0) continue;
-			//确定 shopid
-			String shopId = bean.getShopId();
-			for (T b : mTransition.getSourceData())
-			{
-				//id 相同,表示是一个id
-				if (b.isAn(shopId))
-				{
-					result.add(b);
-					break;
-				}
-			}
-		}
-		return result;
-	}
 
 	@Override
-	public List<ShopBean> seeJoinShop()
+	public List<ShopCartModel> seeJoinShop()
 	{
-		List<ShopBean> result = new ArrayList<>();
-		for (ShopBean bean : shoppingCartOfGoods)
+		List<ShopCartModel> result = new ArrayList<>();
+		for (ShopCartModel bean : shoppingCartOfGoods)
 		{
-			if (bean.isJoin())
+			if (bean.getShop().isJoin())
 				result.add(bean);
 		}
 
@@ -172,14 +155,32 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 	{
 		double result = 0;
 
-		for (ShopBean b : shoppingCartOfGoods)
+		for (ShopCartModel b : shoppingCartOfGoods)
 		{
-			if (!b.isJoin()) continue;
+			if (!canCombined(b)) continue;
 			//单间 * 数量
-			result += b.getPrice() * b.getCount();
+			result += b.getShop().getPrice() * b.getShop().getCount();
 		}
 
 		return result;
+	}
+
+	/**
+	 * 是否可以运算
+	 *
+	 * @param b
+	 * @return true 可以运算 ,false 不允许运算
+	 */
+	private boolean canCombined(ShopCartModel b)
+	{
+		if (b == null || b.getShop() == null)//||b.getSource() 理论上这种情况不存在
+			return false;
+		//没有 加入 结算行列 , continue
+		if (!b.getShop().isJoin()) return false;
+		//如果 失效了 , continue
+		if (b.getShop().isFailure()) return false;
+
+		return true;
 	}
 
 	@Override
@@ -187,10 +188,10 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 	{
 		double result = 0;
 
-		for (ShopBean b : shoppingCartOfGoods)
+		for (ShopCartModel b : shoppingCartOfGoods)
 		{
-			if (!b.isJoin()) continue;
-			result += b.getFee();
+			if (!canCombined(b)) continue;
+			result += b.getShop().getFee();
 		}
 
 		return result;
@@ -230,8 +231,8 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 
 	private void deleteShop(String id, IShopCartAction ISCA)
 	{
-		ShopBean bean = getShopBeanById(id);
-		if (bean != null && shoppingCartOfGoods.contains(bean))
+		ShopCartModel bean = getShopBeanById(id);
+		if (bean != null)//&& existing(bean) 多余了
 		{
 			shoppingCartOfGoods.remove(bean);
 		}
@@ -247,56 +248,56 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 	@Override
 	public synchronized void shopAdd(String id)
 	{
-		ShopBean bean = getShopBeanById(id);
-		if (bean == null) return;
-		changeShopCount(bean.getCount() + 1, id);
+		ShopCartModel bean = getShopBeanById(id);
+		if (bean == null || bean.getShop() == null) return;
+		changeShopCount(bean.getShop().getCount() + 1, id);
 	}
 
 
 	@Override
 	public synchronized void shopMinus(String id)
 	{
-		ShopBean bean = getShopBeanById(id);
-		if (bean == null) return;
-		changeShopCount(bean.getCount() - 1, id);
+		ShopCartModel bean = getShopBeanById(id);
+		if (bean == null || bean.getShop() == null) return;
+		changeShopCount(bean.getShop().getCount() - 1, id);
 	}
 
 
 	@Override
 	public void changeShopCount(int count, String id)
 	{
-		ShopBean bean = getShopBeanById(id);
-		if (bean == null) return;
+		ShopCartModel bean = getShopBeanById(id);
+		if (bean == null || bean.getShop() == null) return;
 		if (count < 1)
 		{
 			if (mICartAction != null)
 				mICartAction.onCartErr(IShopCartAction.CartErrCode.COUNT_LESS_THAN_1);
 			return;
 		}
-		if (count < bean.getMin_count())
+		if (count < bean.getShop().getMin_count())
 		{
 			if (mICartAction != null)
 				mICartAction.onCartErr(IShopCartAction.CartErrCode.OUT_OF_MIN_COUNT);
 			return;
 		}
-		if (count > bean.getMax_count())
+		if (count > bean.getShop().getMax_count())
 		{
 			if (mICartAction != null)
 				mICartAction.onCartErr(IShopCartAction.CartErrCode.OUT_OF_MAX_COUNT);
 			return;
 		}
-		bean.setCount(count);
+		bean.getShop().setCount(count);
 
 		if (mICartAction != null)
 			mICartAction.onCombinedChange(combined(), fee());
 	}
 
 	@Override
-	public ShopBean getShopBeanById(String id)
+	public ShopCartModel getShopBeanById(String id)
 	{
-		for (ShopBean bean : shoppingCartOfGoods)
+		for (ShopCartModel bean : shoppingCartOfGoods)
 		{
-			if (bean.getId().equals(id))
+			if (bean.getShop().getId().equals(id))
 				return bean;
 		}
 		return null;
