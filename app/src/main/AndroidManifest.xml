@@ -20,6 +20,11 @@
             android:label="@string/title_activity_test1"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".test2.Test2Activity"
+            android:label="@string/title_activity_test1"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
