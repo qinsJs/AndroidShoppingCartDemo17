@@ -16,20 +16,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="test1"
-        android:text="UI 1 模拟 Data"
+        android:text="UI 1 "
         android:textAllCaps="false"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="test2"
-        android:text="UI 1 Json Data"
+        android:text="UI 2 "
         android:textAllCaps="false"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="test3"
-        android:text="UI 2 Json Data"
+        android:text="my yi "
         android:textAllCaps="false"/>
 </LinearLayout>

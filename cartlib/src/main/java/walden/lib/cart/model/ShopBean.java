@@ -39,6 +39,10 @@ public class ShopBean
 	 */
 	private boolean isJoin;
 	//-----
+	/**
+	 * 商品图片
+	 */
+	private String pic;
 
 	/**
 	 * N

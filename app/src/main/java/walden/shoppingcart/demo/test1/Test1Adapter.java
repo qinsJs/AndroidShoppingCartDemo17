@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -117,6 +118,16 @@ public class Test1Adapter extends CartAdapter<Test1Bean.DataBean>
 		private ImageView add;
 	}
 
+	public void selectAll(boolean isCheck)
+	{
+		for (ShopBean b : mCart.seeCart())
+		{
+			b.setJoin(isCheck);
+		}
+		notifyDataSetChanged();
+		mCart.cashier();
+	}
+
 	@Override
 	public void onCartErr(CartErrCode code)
 	{
@@ -126,12 +137,14 @@ public class Test1Adapter extends CartAdapter<Test1Bean.DataBean>
 	@Override
 	public void onGoodsChange(List<ShopBean> shopList)
 	{
+		Toast.makeText(mContext, "购物车商品发生改变", Toast.LENGTH_LONG).show();
 		notifyDataSetChanged();
 	}
 
 	@Override
 	public void onCombinedChange(double combined, double fee)
 	{
+		Toast.makeText(mContext, "合计", Toast.LENGTH_LONG).show();
 		//偷懒
 		((Test1Activity) mContext).heji((combined + fee) + "");
 	}

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
@@ -53,6 +54,7 @@ public class Test1Activity extends AppCompatActivity implements View.OnClickList
 		findViewById(R.id.linearLayout).setOnClickListener(this);
 		settlement.setOnClickListener(this);
 		delete_text.setOnClickListener(this);
+		all_checks.setOnClickListener(this);
 	}
 
 	@Override
@@ -70,6 +72,9 @@ public class Test1Activity extends AppCompatActivity implements View.OnClickList
 				}
 				mCart.deleteShop(del);
 				break;
+			case R.id.all_checks:
+				mAdapter.selectAll(all_checks.isChecked());
+				break;
 			case R.id.linearLayout:
 				try
 				{
@@ -78,6 +83,7 @@ public class Test1Activity extends AppCompatActivity implements View.OnClickList
 					mCart.addShop(test1Bean.getData().get(0));
 				} catch (Exception e)
 				{
+					Snackbar.make(settlement, " " + e.toString(), Snackbar.LENGTH_LONG).show();
 				}
 				break;
 		}

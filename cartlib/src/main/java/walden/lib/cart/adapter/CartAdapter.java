@@ -5,6 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import java.util.List;
+
 import walden.lib.cart.ShopCart;
 import walden.lib.cart.model.ShopBean;
 import walden.lib.cart.usb.ICart;
@@ -59,4 +61,27 @@ public abstract class CartAdapter<T extends IServiceBean> extends BaseAdapter im
 	}
 
 	protected abstract View getItemView(int position, View convertView, ViewGroup parent, ShopBean b, ICart<T> cart);
+
+	public void selectAll(boolean isCheck)
+	{
+		for (ShopBean b : mCart.seeCart())
+		{
+			b.setJoin(isCheck);
+		}
+		notifyDataSetChanged();
+		mCart.cashier();
+	}
+
+	@Override
+	public void onCartErr(CartErrCode code)
+	{
+
+	}
+
+	@Override
+	public void onGoodsChange(List<ShopBean> shopList)
+	{
+		//数据改变一定要刷新!
+		notifyDataSetChanged();
+	}
 }
