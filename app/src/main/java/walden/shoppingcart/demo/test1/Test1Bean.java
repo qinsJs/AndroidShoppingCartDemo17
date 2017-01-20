@@ -2,6 +2,7 @@ package walden.shoppingcart.demo.test1;
 
 import java.util.List;
 
+import walden.lib.cart.model.ShopBean;
 import walden.lib.cart.usb.IServiceBean;
 
 /**
@@ -237,10 +238,65 @@ public class Test1Bean
 			this.p_news = p_news;
 		}
 
+
 		@Override
-		public boolean isAn(String id)
+		public String giftId()
 		{
-			return p_id.equals(id);
+			return p_id;
+		}
+
+		@Override
+		public String giftName()
+		{
+			return p_name;
+		}
+
+		@Override
+		public double giftPrice()
+		{
+			return Double.valueOf(p_mprice);
+		}
+
+		@Override
+		public int giftCount()
+		{
+			return Integer.valueOf(p_number);
+		}
+
+		@Override
+		public double giftFee()
+		{
+			return 0.0;
+		}
+
+		@Override
+		public boolean isJoin()
+		{
+			return false;
+		}
+
+		@Override
+		public boolean isFailure()
+		{
+			return false;
+		}
+
+		@Override
+		public int minCount()
+		{
+			return 1;
+		}
+
+		@Override
+		public int maxCount()
+		{
+			return 1000;
+		}
+
+		@Override
+		public void syncData(ShopBean b)
+		{
+			p_number = b.getCount() + "";
 		}
 	}
 }

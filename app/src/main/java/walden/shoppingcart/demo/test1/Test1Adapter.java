@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
-
 import walden.lib.cart.adapter.CartAdapter;
 import walden.lib.cart.model.ShopBean;
 import walden.lib.cart.usb.ICart;
@@ -29,9 +27,9 @@ public class Test1Adapter extends CartAdapter<Test1Bean.DataBean>
 	}
 
 	@Override
-	protected View getItemView(int position, View convertView, ViewGroup parent, final ShopBean b, ICart<Test1Bean.DataBean> cart)
+	protected View getItemView(int position, View convertView, ViewGroup parent, ShopBean b, Test1Bean.DataBean dataBean, ICart<Test1Bean.DataBean> cart)
 	{
-		ViewHolder holder = null;
+		ViewHolder holder;
 		if (convertView == null)
 		{
 			holder = new ViewHolder();
@@ -47,6 +45,10 @@ public class Test1Adapter extends CartAdapter<Test1Bean.DataBean>
 			holder.p_number = (TextView) convertView.findViewById(R.id.p_number);//数量
 			holder.minus = (ImageView) convertView.findViewById(R.id.minus);//减
 			holder.add = (ImageView) convertView.findViewById(R.id.add);//加
+
+			holder.p_discount.setVisibility(View.VISIBLE);
+			holder.p_news.setVisibility(View.VISIBLE);
+
 			convertView.setTag(holder);
 		} else
 		{
@@ -118,15 +120,6 @@ public class Test1Adapter extends CartAdapter<Test1Bean.DataBean>
 		private ImageView add;
 	}
 
-	public void selectAll(boolean isCheck)
-	{
-		for (ShopBean b : mCart.seeCart())
-		{
-			b.setJoin(isCheck);
-		}
-		notifyDataSetChanged();
-		mCart.cashier();
-	}
 
 	@Override
 	public void onCartErr(CartErrCode code)
@@ -134,12 +127,6 @@ public class Test1Adapter extends CartAdapter<Test1Bean.DataBean>
 
 	}
 
-	@Override
-	public void onGoodsChange(List<ShopBean> shopList)
-	{
-		Toast.makeText(mContext, "购物车商品发生改变", Toast.LENGTH_LONG).show();
-		notifyDataSetChanged();
-	}
 
 	@Override
 	public void onCombinedChange(double combined, double fee)

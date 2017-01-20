@@ -9,6 +9,7 @@ import java.util.List;
 
 import walden.lib.cart.ShopCart;
 import walden.lib.cart.model.ShopBean;
+import walden.lib.cart.model.ShopCartModel;
 import walden.lib.cart.usb.ICart;
 import walden.lib.cart.usb.IServiceBean;
 import walden.lib.cart.usb.IShopCartAction;
@@ -42,7 +43,7 @@ public abstract class CartAdapter<T extends IServiceBean> extends BaseAdapter im
 	}
 
 	@Override
-	public ShopBean getItem(int position)
+	public ShopCartModel getItem(int position)
 	{
 		return mCart.seeCart().get(position);
 	}
@@ -56,17 +57,17 @@ public abstract class CartAdapter<T extends IServiceBean> extends BaseAdapter im
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
-		ShopBean b = mCart.seeCart().get(position);
-		return getItemView(position, convertView, parent, b, mCart);
+		ShopCartModel scm = getItem(position);
+		return getItemView(position, convertView, parent, scm.getShop(), (T) scm.getSource(), mCart);
 	}
 
-	protected abstract View getItemView(int position, View convertView, ViewGroup parent, ShopBean b, ICart<T> cart);
+	protected abstract View getItemView(int position, View convertView, ViewGroup parent, ShopBean b, T t, ICart<T> cart);
 
 	public void selectAll(boolean isCheck)
 	{
-		for (ShopBean b : mCart.seeCart())
+		for (ShopCartModel b : mCart.seeCart())
 		{
-			b.setJoin(isCheck);
+			b.getShop().setJoin(isCheck);
 		}
 		notifyDataSetChanged();
 		mCart.cashier();
@@ -79,7 +80,7 @@ public abstract class CartAdapter<T extends IServiceBean> extends BaseAdapter im
 	}
 
 	@Override
-	public void onGoodsChange(List<ShopBean> shopList)
+	public void onGoodsChange(List<ShopCartModel> shopList)
 	{
 		//数据改变一定要刷新!
 		notifyDataSetChanged();

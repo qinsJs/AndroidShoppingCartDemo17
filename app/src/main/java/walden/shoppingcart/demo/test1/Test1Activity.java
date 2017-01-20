@@ -16,9 +16,8 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-import walden.lib.cart.ShopBeanTransition;
 import walden.lib.cart.ShopCart;
-import walden.lib.cart.model.ShopBean;
+import walden.lib.cart.model.ShopCartModel;
 import walden.lib.cart.usb.ICart;
 import walden.shoppingcart.demo.A;
 import walden.shoppingcart.demo.R;
@@ -66,9 +65,9 @@ public class Test1Activity extends AppCompatActivity implements View.OnClickList
 				break;
 			case R.id.delete_text: //删除
 				List<String> del = new ArrayList<>();
-				for (ShopBean bean : mCart.seeJoinShop())
+				for (ShopCartModel bean : mCart.seeJoinShop())
 				{
-					del.add(bean.getId());
+					del.add(bean.getShop().getId());
 				}
 				mCart.deleteShop(del);
 				break;
@@ -99,19 +98,7 @@ public class Test1Activity extends AppCompatActivity implements View.OnClickList
 	{
 		String json = A.getJson(this, "test1.json");
 
-		mCart = new ShopCart<Test1Bean.DataBean>(new ShopBeanTransition<Test1Bean.DataBean>()
-		{
-			@Override
-			public ShopBean toShopBean(Test1Bean.DataBean source)
-			{
-				ShopBean bean = new ShopBean(source.getP_name(), Double.valueOf(source.getP_mprice()));
-				bean.setCount(Integer.valueOf(source.getP_number()));
-				bean.setDistribution(Double.valueOf(source.getP_discount()));
-				bean.setShopId(source.getP_id());
-
-				return bean;
-			}
-		});
+		mCart = new ShopCart<Test1Bean.DataBean>();
 		mAdapter = new Test1Adapter(this, mCart);
 		try
 		{
