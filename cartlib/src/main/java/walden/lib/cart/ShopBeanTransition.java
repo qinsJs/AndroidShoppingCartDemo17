@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import walden.lib.cart.model.ShopBean;
+import walden.lib.cart.model.ShopCartModel;
 import walden.lib.cart.usb.IServiceBean;
 
 /**
@@ -12,7 +13,7 @@ import walden.lib.cart.usb.IServiceBean;
  * Created by next on 17-1-19.
  */
 
-public abstract class ShopBeanTransition<T extends IServiceBean>
+public class ShopBeanTransition<T extends IServiceBean>
 {
 	private List<T> sourceData;
 
@@ -25,27 +26,32 @@ public abstract class ShopBeanTransition<T extends IServiceBean>
 	 *
 	 * @return
 	 */
-	public List<ShopBean> transition(List<T> sd)
+	public List<ShopCartModel> transition(List<T> sd)
 	{
 		this.sourceData = sd;
 
 		if (sourceData == null)
 			throw new NullPointerException(" 转换 源数据 你不能拿空的糊弄我! ");
 
-		List<ShopBean> result = new ArrayList<ShopBean>();
+		List<ShopCartModel> result = new ArrayList<ShopCartModel>();
 		for (T s : sourceData)
 		{
 			ShopBean bean = toShopBean(s);
 			if (bean == null) continue;
-			result.add(bean);
+			result.add(toShopCartModel(bean, s));
 		}
-
 		return result;
 	}
 
-	public List<T> getSourceData()
+
+	public ShopCartModel toShopCartModel(T source)
 	{
-		return sourceData;
+		return toShopCartModel(toShopBean(source), source);
+	}
+
+	public ShopCartModel toShopCartModel(ShopBean b, T t)
+	{
+		return new ShopCartModel(b, t);
 	}
 
 	/**
@@ -54,5 +60,9 @@ public abstract class ShopBeanTransition<T extends IServiceBean>
 	 * @param source
 	 * @return return null 放弃这个数据
 	 */
-	public abstract ShopBean toShopBean(T source);
+	public ShopBean toShopBean(T source)
+	{
+		return new ShopBean(source);
+	}
+
 }

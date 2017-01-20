@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import walden.lib.cart.model.ShopBean;
+import walden.lib.cart.model.ShopCartModel;
 import walden.lib.cart.usb.ICart;
 import walden.lib.cart.usb.IServiceBean;
 import walden.lib.cart.usb.IShopCartAction;
@@ -21,7 +22,7 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 	/**
 	 * 购物车商品
 	 */
-	private List<ShopBean> shoppingCartOfGoods;
+	private List<ShopCartModel> shoppingCartOfGoods;
 
 	/**
 	 * 数据转换器
@@ -33,19 +34,19 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 	 */
 	private IShopCartAction mICartAction;
 
-	public ShopCart(ShopBeanTransition<T> transition)
+	public ShopCart()
 	{
-		this(transition, null);
+		this(null);
 	}
 
-	public ShopCart(ShopBeanTransition<T> transition, IShopCartAction iCartAction)
+	public ShopCart(IShopCartAction iCartAction)
 	{
-		this(transition, iCartAction, null);
+		this(iCartAction, null);
 	}
 
-	public ShopCart(ShopBeanTransition<T> transition, IShopCartAction iCartAction, List<ShopBean> shoppingCartOfGoods)
+	public ShopCart(IShopCartAction iCartAction, List<ShopCartModel> shoppingCartOfGoods)
 	{
-		mTransition = transition;
+		mTransition = new ShopBeanTransition<T>();
 		mICartAction = iCartAction;
 		this.shoppingCartOfGoods = shoppingCartOfGoods;
 
@@ -63,9 +64,15 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 
 
 	@Override
-	public void addShop(T b)
+	public void addShop(IServiceBean b)
 	{
 		addShop(mTransition.toShopBean(b));
+	}
+
+	@Override
+	public void cutHand(Collection<IServiceBean> shops)
+	{
+
 	}
 
 	/**
@@ -96,7 +103,7 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 		if (mICartAction != null)
 		{
 			mICartAction.onGoodsChange(seeCart());
-			mICartAction.onCombinedChange(combined(),fee());
+			mICartAction.onCombinedChange(combined(), fee());
 		}
 	}
 
@@ -114,7 +121,7 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 		if (ISCA != null)
 		{
 			ISCA.onGoodsChange(seeCart());
-			ISCA.onCombinedChange(combined(),fee());
+			ISCA.onCombinedChange(combined(), fee());
 		}
 	}
 
@@ -183,7 +190,7 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 		for (ShopBean b : shoppingCartOfGoods)
 		{
 			if (!b.isJoin()) continue;
-			result += b.getDistribution();
+			result += b.getFee();
 		}
 
 		return result;
@@ -217,7 +224,7 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 		if (mICartAction != null)
 		{
 			mICartAction.onGoodsChange(seeCart());
-			mICartAction.onCombinedChange(combined(),fee());
+			mICartAction.onCombinedChange(combined(), fee());
 		}
 	}
 
@@ -232,7 +239,7 @@ public class ShopCart<T extends IServiceBean> implements ICart<T>
 		if (ISCA != null)
 		{
 			ISCA.onGoodsChange(seeCart());
-			ISCA.onCombinedChange(combined(),fee());
+			ISCA.onCombinedChange(combined(), fee());
 		}
 	}
 

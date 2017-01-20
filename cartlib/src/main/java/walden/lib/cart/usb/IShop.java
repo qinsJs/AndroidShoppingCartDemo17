@@ -13,6 +13,19 @@ import walden.lib.cart.model.ShopBean;
 public interface IShop
 {
 	/**
+	 * @param b
+	 */
+	void addShop(IServiceBean b);
+
+
+	/**
+	 * 砍手,添加分多分多分多商品进入购物车
+	 *
+	 * @param shops
+	 */
+	void cutHand(Collection<IServiceBean> shops);
+
+	/**
 	 * 删除商品
 	 *
 	 * @param id

@@ -20,25 +20,6 @@ public interface ICart<T extends IServiceBean> extends IShop
 	void loadCart(List<T> shops);
 
 	/**
-	 * @param b
-	 */
-	void addShop(T b);
-
-	/**
-	 * 添加一个商品进购物车
-	 *
-	 * @param shop
-	 */
-	void addShop(ShopBean shop);
-
-	/**
-	 * 砍手,添加分多分多分多商品进入购物车
-	 *
-	 * @param shops
-	 */
-	void cutHand(List<ShopBean> shops);
-
-	/**
 	 * 差看购物车里面的商品
 	 *
 	 * @return

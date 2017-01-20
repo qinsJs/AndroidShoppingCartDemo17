@@ -1,6 +1,6 @@
 package walden.lib.cart.model;
 
-import java.util.UUID;
+import walden.lib.cart.usb.IServiceBean;
 
 /**
  * Created by next on 17-1-18.
@@ -13,11 +13,7 @@ public class ShopBean
 	 * 自己使用的 id,自己生成
 	 */
 	private String id;
-	/**
-	 * N
-	 * 这个是给服务器预留的Id位置
-	 */
-	private String shopId;
+
 	/**
 	 * Y
 	 * 商品名称
@@ -35,35 +31,19 @@ public class ShopBean
 	private int count;
 
 	/**
-	 * 是否参与 合计 计算
+	 * 是否参与 合计 计算 , true 表示 参加 合计 计算
 	 */
 	private boolean isJoin;
-	//-----
+//-----
 	/**
-	 * 商品图片
-	 */
-	private String pic;
-
-	/**
-	 * N
-	 * 商品简介
-	 */
-	private String introduction;
-	/**
-	 * N
-	 * 商品状态,下架等
-	 */
-	private ShopStatus status;
-	/**
-	 * N
-	 * 商品供应商信息
-	 */
-	private ShopMerchant merchant;
-	/**
-	 * N
 	 * 配送费用
 	 */
-	private double distribution;
+	private double fee;
+
+	/**
+	 * 是否失效, true 失效 不参加运算
+	 */
+	private boolean isFailure;
 
 	/**
 	 * 商品数量最小限制
@@ -75,24 +55,24 @@ public class ShopBean
 	 */
 	private int max_count = Integer.MAX_VALUE;
 
-	public ShopBean(String name, double price)
+	public ShopBean(IServiceBean rules)
 	{
-		this(name, price, 1);
+		id = rules.giftId();
+		name = rules.giftName();
+		price = rules.giftPrice();
+		count = rules.giftCount();
+		fee = rules.giftFee();
+		isJoin = rules.isJoin();
+		isFailure = rules.isFailure();
+		min_count = rules.minCount();
+		max_count = rules.maxCount();
 	}
-
-	public ShopBean(String name, double price, int count)
-	{
-		this.id = UUID.randomUUID().toString();
-		this.name = name;
-		this.price = price;
-		this.count = count;
-	}
-
 
 	public synchronized void setCount(int count)
 	{
 		this.count = count;
 	}
+
 
 	public String getId()
 	{
@@ -102,16 +82,6 @@ public class ShopBean
 	public void setId(String id)
 	{
 		this.id = id;
-	}
-
-	public String getShopId()
-	{
-		return shopId;
-	}
-
-	public void setShopId(String shopId)
-	{
-		this.shopId = shopId;
 	}
 
 	public String getName()
@@ -146,47 +116,20 @@ public class ShopBean
 
 	public void setJoin(boolean join)
 	{
-		isJoin = join;
+		if (isFailure)
+			isJoin = false;
+		else
+			isJoin = join;
 	}
 
-	public String getIntroduction()
+	public boolean isFailure()
 	{
-		return introduction;
+		return isFailure;
 	}
 
-	public void setIntroduction(String introduction)
+	public void setFailure(boolean failure)
 	{
-		this.introduction = introduction;
-	}
-
-	public ShopStatus getStatus()
-	{
-		return status;
-	}
-
-	public void setStatus(ShopStatus status)
-	{
-		this.status = status;
-	}
-
-	public ShopMerchant getMerchant()
-	{
-		return merchant;
-	}
-
-	public void setMerchant(ShopMerchant merchant)
-	{
-		this.merchant = merchant;
-	}
-
-	public double getDistribution()
-	{
-		return distribution;
-	}
-
-	public void setDistribution(double distribution)
-	{
-		this.distribution = distribution;
+		isFailure = failure;
 	}
 
 	public int getMin_count()
@@ -207,5 +150,15 @@ public class ShopBean
 	public void setMax_count(int max_count)
 	{
 		this.max_count = max_count;
+	}
+
+	public double getFee()
+	{
+		return fee;
+	}
+
+	public void setFee(double fee)
+	{
+		this.fee = fee;
 	}
 }
