@@ -8,9 +8,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import walden.lib.cart.adapter.CartAdapter;
 import walden.lib.cart.model.ShopBean;
@@ -24,7 +22,7 @@ import walden.shoppingcart.demo.R;
 
 public class Test2Adapter extends CartAdapter<Test2Bean.ContentBean.GooddetailBean>
 {
-	Set<String> mMerchants;
+	Map<String, ShopBean> mMerchants;
 	//设计失败!
 	Map<String, Boolean> mMerchantsCheck;
 	boolean isEdit;
@@ -32,7 +30,7 @@ public class Test2Adapter extends CartAdapter<Test2Bean.ContentBean.GooddetailBe
 	public Test2Adapter(Context context, ICart<Test2Bean.ContentBean.GooddetailBean> cart)
 	{
 		super(context, cart);
-		mMerchants = new HashSet<>();
+		mMerchants = new HashMap<>();
 		mMerchantsCheck = new HashMap<>();
 	}
 
@@ -45,7 +43,7 @@ public class Test2Adapter extends CartAdapter<Test2Bean.ContentBean.GooddetailBe
 	@Override
 	public void notifyDataSetChanged()
 	{
-		mMerchants.clear();
+		//mMerchants.clear();
 		super.notifyDataSetChanged();
 	}
 
@@ -64,35 +62,45 @@ public class Test2Adapter extends CartAdapter<Test2Bean.ContentBean.GooddetailBe
 		}
 
 		click c = new click(b, g);
+//		click c = null;
 
+		//判断是否需要显示商家信息
+		boolean isFist;
+		if (mMerchants.get(g.getMerchants()) == null)
+		{
+			//第一次 肯定是要显示的
+			isFist = true;
+		} else
+		{
+			isFist = mMerchants.get(g.getMerchants()).getId().equals(b.getId());
+		}
 
-		if (mMerchants.contains(g.getMerchants()))
+		if (!isFist)
 		{
 			holder.item_merchants_ll.setVisibility(View.GONE);
 			//设置选择监听
-			holder.cb_GroupItem.setOnClickListener(null);
+			//holder.cb_GroupItem.setOnClickListener(null);
 			//附初始值
-			holder.cb_GroupItem.setChecked(mMerchantsCheck.get(g.getMerchants()));
+
 		} else
 		{
 			holder.item_merchants_ll.setVisibility(View.VISIBLE);
 			//设置选择监听
 			holder.cb_GroupItem.setOnClickListener(c);
-			//附初始值
-			holder.cb_GroupItem.setChecked(false);
 
-			mMerchants.add(g.getMerchants());
-			mMerchantsCheck.put(g.getMerchants(), false);
+			if (mMerchants.get(g.getMerchants()) == null)
+				mMerchants.put(g.getMerchants(), b);
 
 			holder.tv_Position.setText(g.getMerchants());
 		}
 
-		c.setMerchantsClkick(holder.cb_GroupItem.isChecked());
-
+		if (mMerchantsCheck.get(g.getMerchants()) == null)
+			mMerchantsCheck.put(g.getMerchants(), false);
+		else
+			holder.cb_GroupItem.setChecked(mMerchantsCheck.get(g.getMerchants()));
 
 		holder.cb_Item.setChecked(b.isJoin());
 		holder.cb_Item.setOnClickListener(c);
-		c.setShopClkick(holder.cb_Item.isChecked());
 
 		holder.tv_Price.setText("￥" + b.getPrice());
 		holder.tv_Count.setText("x" + b.getCount());
@@ -110,8 +118,8 @@ public class Test2Adapter extends CartAdapter<Test2Bean.ContentBean.GooddetailBe
 			holder.et_Count.setText(b.getCount() + "");
 		} else
 		{
-			holder.ll_Nomal.setVisibility(View.GONE);
-			holder.ll_Edit.setVisibility(View.VISIBLE);
+			holder.ll_Nomal.setVisibility(View.VISIBLE);
+			holder.ll_Edit.setVisibility(View.GONE);
 			holder.iv_Delete.setVisibility(View.GONE);
 			holder.iv_Delete.setOnClickListener(null);
 
@@ -131,23 +139,10 @@ public class Test2Adapter extends CartAdapter<Test2Bean.ContentBean.GooddetailBe
 		ShopBean b;
 		Test2Bean.ContentBean.GooddetailBean g;
 
-		boolean isShopCheck;
-		boolean isMerchantsCheck;
-
 		public click(ShopBean b, Test2Bean.ContentBean.GooddetailBean g)
 		{
 			this.b = b;
 			this.g = g;
-		}
-
-		public void setShopClkick(boolean icb)
-		{
-			isShopCheck = icb;
-		}
-
-		public void setMerchantsClkick(boolean icb)
-		{
-			isMerchantsCheck = icb;
 		}
 
 		@Override
@@ -158,21 +153,49 @@ public class Test2Adapter extends CartAdapter<Test2Bean.ContentBean.GooddetailBe
 			{
 				//商家选择
 				case R.id.cb_GroupItem:
-					isMerchantsCheck = !isMerchantsCheck;
-					mMerchantsCheck.put(g.getMerchants(), isMerchantsCheck);
+
+					//if (mMerchantsCheck.get(g.getMerchants()) == null) return;
+
+					boolean isMerchantsCheck = mMerchantsCheck.get(g.getMerchants());
+					mMerchantsCheck.put(g.getMerchants(), !isMerchantsCheck);
 					for (ShopCartModel scm : mCart.seeCart())
 					{
-						scm.getShop().setJoin(isMerchantsCheck);
+						Test2Bean.ContentBean.GooddetailBean gb = (Test2Bean.ContentBean.GooddetailBean) scm.getSource();
+
+						if (gb.getMerchants().equals(g.getMerchants()))
+						{
+							scm.getShop().setJoin(!isMerchantsCheck);
+						}
 					}
 					break;
 				//商品选择
 				case R.id.cb_Item:
-					isShopCheck = !isShopCheck;
+					boolean isShopCheck = !mCart.getShopBeanById(id).getShop().isJoin();
 					mCart.getShopBeanById(id).getShop().setJoin(isShopCheck);
 
 					if (isShopCheck)
 					{
 						//TODO 全选判断
+						for (ShopCartModel shop : mCart.seeCart())
+						{
+							Test2Bean.ContentBean.GooddetailBean myBean = (Test2Bean.ContentBean.GooddetailBean) shop.getSource();
+							ShopBean mShop = shop.getShop();
+
+							if (!myBean.getMerchants().equals(g.getMerchants())) continue;
+
+							//如果有一个子 item 有一个没有选中,旅行结束
+							if (!mShop.isJoin())
+							{
+								mMerchantsCheck.put(g.getMerchants(), false);
+								notifyDataSetChanged();
+								return;
+							}
+						}
+						mMerchantsCheck.put(g.getMerchants(), true);
+//						如果这么循环完了,那就是全部选中了...
+					} else
+					{
+						mMerchantsCheck.put(g.getMerchants(), false);
 					}
 
 					break;
