@@ -1,0 +1,119 @@
+{
+  "msg": "操作成功",
+  "code": null,
+  "data": {
+    "totalNum": 0,
+    "totalPrice": {
+      "amount": null,
+      "cent": 0,
+      "currency": "CNY"
+    },
+    "userId": "d64381f704dc4db08ea271565aa922aa",
+    "communityCartList": [
+      {
+        "mPrice": {
+          "amount": null,
+          "cent": 0,
+          "currency": "CNY"
+        },
+        "shopCartId": "6300a78b-ba95-11e6-99f8-000c2913e3a3",
+        "communityName": "欣欣想小区1",
+        "mNum": 0,
+        "communityId": "342f9ceb-ecfe-11e5-b2bd-0050562cb46c",
+        "cartItems": [
+          {
+            "merchantId": "f957ac19-a70d-11e6-99f8-000c2913e3a3",
+            "price": {
+              "amount": 0.11,
+              "cent": 11,
+              "currency": "CNY"
+            },
+            "alarmNum": 0,
+            "num": 1,
+            "stockNum": 182,
+            "commodityId": "7db67f6d-a716-11e6-99f8-000c2913e3a3",
+            "hImg": "2016-11-10/b57f9e1f-0844-47d7-9219-51a4c06ca322.png",
+            "activityLabel": null,
+            "commodityDesc": "公告",
+            "cartItemId": "b48481cd-d3d6-11e6-99f8-000c2913e3a3",
+            "commodityName": "上衣",
+            "status": 0
+          },
+          {
+            "merchantId": "4ec35b71-ecb8-11e5-b2bd-0050562cb46c",
+            "price": {
+              "amount": 0.01,
+              "cent": 1,
+              "currency": "CNY"
+            },
+            "alarmNum": 0,
+            "num": 1,
+            "stockNum": 11,
+            "commodityId": "20562a55-8151-11e6-99f8-000c2913e3a3",
+            "hImg": "2016-08-08/d5f11ab8-884a-4f1e-b2c7-ba4534a0cb5c.jpg",
+            "activityLabel": null,
+            "commodityDesc": "联通",
+            "cartItemId": "54d5ea6b-d3ba-11e6-99f8-000c2913e3a3",
+            "commodityName": "联通",
+            "status": 0
+          },
+          {
+            "merchantId": "749d383c-ecb8-11e5-b2bd-0050562cb46c",
+            "price": {
+              "amount": 0.01,
+              "cent": 1,
+              "currency": "CNY"
+            },
+            "alarmNum": 10,
+            "num": 1,
+            "stockNum": 10,
+            "commodityId": "12304811-bc56-11e6-99f8-000c2913e3a3",
+            "hImg": "2016-12-07/50f4de60-e929-473a-b3c6-7d2a9e41cf9d.jpg",
+            "activityLabel": null,
+            "commodityDesc": null,
+            "cartItemId": "aead5da3-c372-11e6-99f8-000c2913e3a3",
+            "commodityName": "测试4",
+            "status": 1
+          },
+          {
+            "merchantId": "4ec35b71-ecb8-11e5-b2bd-0050562cb46c",
+            "price": {
+              "amount": 10.00,
+              "cent": 1000,
+              "currency": "CNY"
+            },
+            "alarmNum": 0,
+            "num": 3,
+            "stockNum": 21,
+            "commodityId": "1f29ab21-8151-11e6-99f8-000c2913e3a3",
+            "hImg": "2016-08-08/98cf205e-c5dc-46e2-9d20-baac8944be23.jpg",
+            "activityLabel": null,
+            "commodityDesc": "中国移不动萨嘎三个",
+            "cartItemId": "630102f4-ba95-11e6-99f8-000c2913e3a3",
+            "commodityName": "移动",
+            "status": 1
+          },
+          {
+            "merchantId": "4ec35b71-ecb8-11e5-b2bd-0050562cb46c",
+            "price": {
+              "amount": 0.01,
+              "cent": 1,
+              "currency": "CNY"
+            },
+            "alarmNum": 10,
+            "num": 2,
+            "stockNum": 6,
+            "commodityId": "213dd707-8151-11e6-99f8-000c2913e3a3",
+            "hImg": "2016-08-05/f3697911-9a1d-4350-ad0d-ca7db2bd7963small.jpg",
+            "activityLabel": null,
+            "commodityDesc": null,
+            "cartItemId": "659936cc-ba95-11e6-99f8-000c2913e3a3",
+            "commodityName": "aaaaaaaa",
+            "status": 1
+          }
+        ]
+      }
+    ]
+  },
+  "success": true
+}
