@@ -33,7 +33,7 @@ public class Test1Adapter extends CartAdapter<Test1Bean.DataBean>
 		if (convertView == null)
 		{
 			holder = new ViewHolder();
-			convertView = LayoutInflater.from(mContext).inflate(R.layout.ui_1_item, parent, false);
+			convertView = LayoutInflater.from(mContext).inflate(R.layout.item_ui_1, parent, false);
 			holder.checks = (CheckBox) convertView.findViewById(R.id.checks);//选择框
 			holder.p_img1 = (ImageView) convertView.findViewById(R.id.p_img1);//商品缩略图
 			holder.p_name = (TextView) convertView.findViewById(R.id.p_name);//名称

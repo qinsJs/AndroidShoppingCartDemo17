@@ -30,6 +30,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="test3"
-        android:text="my yi "
+        android:text="UI 3 "
         android:textAllCaps="false"/>
 </LinearLayout>
