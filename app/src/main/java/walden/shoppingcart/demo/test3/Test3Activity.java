@@ -61,12 +61,15 @@ public class Test3Activity extends Activity implements v, View.OnClickListener {
      */
     private int mCartState;
 
+    ShopCart cart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.a_ui_3);
+
+        cart = new ShopCart();
 
         initTitle();
         findView();
@@ -86,12 +89,9 @@ public class Test3Activity extends Activity implements v, View.OnClickListener {
             //...
             return;
         }
-        ShopCart cart = new ShopCart();
-        cart.loadCart(tb3.getData().getCommunityCartList());
-        mAdapter = new Test3Adapter(this, cart);
-        mListView.setAdapter(mAdapter);
-        for (int i = 0; i < mAdapter.getGroupCount(); i++)
-            mListView.expandGroup(i);
+
+
+        setData(tb3.getData().getCommunityCartList());
     }
 
     private void initTitle() {
@@ -140,6 +140,9 @@ public class Test3Activity extends Activity implements v, View.OnClickListener {
         // TODO: 2017/2/14 结算 ( 获取选中数量 )
         delTv.setText(R.string.settlement);
 
+        selectAllCb.setVisibility(View.VISIBLE);
+
+
     }
 
     @Override
@@ -150,11 +153,14 @@ public class Test3Activity extends Activity implements v, View.OnClickListener {
 
         titleTv.setText(R.string.complete);
         delTv.setText(R.string.delete);
+
+        selectAllCb.setVisibility(View.GONE);
     }
 
     @Override
     public void del() {
-
+        if (cart != null)
+            cart.delSelect();
     }
 
     @Override
@@ -173,9 +179,15 @@ public class Test3Activity extends Activity implements v, View.OnClickListener {
         priceTv.setText(RMB + s);
     }
 
+
     @Override
     public void setData(List<ParsingServiceShopCart.DataBean.CommunityCartListBean> b) {
 
+        cart.loadCart(b);
+        mAdapter = new Test3Adapter(this, cart);
+        mListView.setAdapter(mAdapter);
+        for (int i = 0; i < mAdapter.getGroupCount(); i++)
+            mListView.expandGroup(i);
     }
 
     @Override

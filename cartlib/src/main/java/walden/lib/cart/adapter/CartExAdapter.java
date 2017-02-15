@@ -93,6 +93,6 @@ public abstract class CartExAdapter extends BaseExpandableListAdapter implements
 
     @Override
     public void onGoodsChange(List<MerchantsBean> shopList) {
-
+        notifyDataSetChanged();
     }
 }

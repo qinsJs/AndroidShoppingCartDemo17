@@ -300,4 +300,71 @@ public class ShopCart implements ICart {
     public void setICartAction(IShopCartAction ICartAction) {
         mICartAction = ICartAction;
     }
+
+
+    //-----添加方法
+
+    /**
+     * 删除 选中
+     */
+    public void delSelect() {
+        //ConcurrentModificationException
+
+        List<MerchantsBean> chche1 = new ArrayList<>();
+
+        List<ShopBean> chace2 = new ArrayList<>();
+
+        for (MerchantsBean mb : shoppingCartOfGoods) {
+            if (mb.isSelected()) {
+                //删除!
+//                shoppingCartOfGoods.remove(mb);
+                chche1.add(mb);
+            } else {
+                //循环遍历 进行删除
+                for (ShopBean b : mb.getShopList()) {
+                    if (b.isJoin())
+                        chace2.add(b);
+                }
+            }
+        }
+
+
+        for (MerchantsBean cmb : chche1) {
+            shoppingCartOfGoods.remove(cmb);
+        }
+
+        for (ShopBean cb : chace2) {
+
+            for (MerchantsBean mb : shoppingCartOfGoods) {
+                List<ShopBean> dsb = mb.getShopList();
+
+                if (dsb.contains(cb)) {
+                    dsb.remove(cb);
+                    break;//推出内循环
+                }
+            }
+
+        }
+
+        checkMerchant();
+
+        if (mICartAction != null) {
+            mICartAction.onCombinedChange(combined(), fee());
+            mICartAction.onGoodsChange(shoppingCartOfGoods);
+        }
+    }
+
+    /**
+     * 检查购物车中商家 中 还有没有 商品
+     * <p>
+     * 如果没有 就失去了意义 将移除购物车
+     */
+    public void checkMerchant() {
+        for (MerchantsBean b : shoppingCartOfGoods) {
+            if (b.getShopList().size() == 0) {
+                //说明 他 子夏的商品已经被删除干净了
+                shoppingCartOfGoods.remove(b);
+            }
+        }
+    }
 }
