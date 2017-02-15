@@ -89,7 +89,8 @@ public class Test3Adapter extends CartExAdapter {
         holder.shop_cart_item_name_tv.setTextColor(0xff000000);
         holder.shop_cart_item_price_tv.setTextColor(Color.RED);
 
-        if (b.isFailure()) {
+        if (cib.getStatus() == 1) {
+            b.setFailure(true);
             //失效
             holder.shop_cart_item_control_ll.setVisibility(View.GONE);
             holder.shop_cart_item_cb.setVisibility(View.GONE);
@@ -98,8 +99,9 @@ public class Test3Adapter extends CartExAdapter {
 
             holder.shop_cart_item_name_tv.setTextColor(0xff999999);
             holder.shop_cart_item_price_tv.setTextColor(0xff999999);
-        } else if (cib.getStockNum() < cib.getAlarmNum()) {
-            //库存小于预警数量
+        } else if (cib.getStockNum() == 0) {
+            //缺货
+            b.setFailure(true);
             holder.shop_cart_item_control_ll.setVisibility(View.GONE);
             holder.shop_cart_item_cb.setVisibility(View.GONE);
             holder.shop_cart_item_sold_out_icon.setVisibility(View.INVISIBLE);
