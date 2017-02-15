@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:background="#ffffff"
               android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:background="@android:color/white"
         android:padding="15dp">
 
@@ -31,6 +31,7 @@
             android:background="@android:color/white"
             android:drawableLeft="@drawable/supermarket"
             android:drawablePadding="12dp"
+            android:gravity="center"
             android:text="第八号当铺"
             android:textColor="#141414"
             android:textSize="15sp"/>

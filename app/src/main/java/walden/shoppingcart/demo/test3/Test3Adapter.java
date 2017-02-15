@@ -1,6 +1,7 @@
 package walden.shoppingcart.demo.test3;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,14 @@ public class Test3Adapter extends CartExAdapter {
 
         holder.item_shopping_car_check_box_parent.setOnClickListener(new Click(null, b.getMerchantsId()));
         holder.tv_item_shopping_car_parent_name.setText(b.getMerchantsname());
+
+        if (b.getMerchantsname().equals("失效商品")) {
+            holder.item_shopping_car_check_box_parent.setVisibility(View.INVISIBLE);
+        } else {
+            holder.item_shopping_car_check_box_parent.setVisibility(View.VISIBLE);
+
+        }
+
         return convertView;
     }
 
@@ -72,6 +81,34 @@ public class Test3Adapter extends CartExAdapter {
 
         holder.shop_cart_item_reduce_tv.setOnClickListener(c);
         holder.shop_cart_item_add_tv.setOnClickListener(c);
+
+
+        ParsingServiceShopCart.DataBean.CommunityCartListBean.CartItemsBean cib = (ParsingServiceShopCart.DataBean.CommunityCartListBean.CartItemsBean) b.getArg1();
+
+
+        holder.shop_cart_item_name_tv.setTextColor(0xff000000);
+        holder.shop_cart_item_price_tv.setTextColor(Color.RED);
+
+        if (b.isFailure()) {
+            //失效
+            holder.shop_cart_item_control_ll.setVisibility(View.GONE);
+            holder.shop_cart_item_cb.setVisibility(View.GONE);
+
+            holder.shop_cart_item_sold_out_icon.setVisibility(View.VISIBLE);
+
+            holder.shop_cart_item_name_tv.setTextColor(0xff999999);
+            holder.shop_cart_item_price_tv.setTextColor(0xff999999);
+        } else if (cib.getStockNum() < cib.getAlarmNum()) {
+            //库存小于预警数量
+            holder.shop_cart_item_control_ll.setVisibility(View.GONE);
+            holder.shop_cart_item_cb.setVisibility(View.GONE);
+            holder.shop_cart_item_sold_out_icon.setVisibility(View.INVISIBLE);
+        } else {
+            holder.shop_cart_item_cb.setVisibility(View.VISIBLE);
+            holder.shop_cart_item_control_ll.setVisibility(View.VISIBLE);
+            holder.shop_cart_item_sold_out_icon.setVisibility(View.GONE);
+        }
+
 
         return convertView;
     }
@@ -170,6 +207,10 @@ public class Test3Adapter extends CartExAdapter {
         TextView shop_cart_item_reduce_tv;
         TextView shop_cart_item_number_tv;
         TextView shop_cart_item_add_tv;
+        //- 1 +
+        View shop_cart_item_control_ll;
+        //下架logo
+        View shop_cart_item_sold_out_icon;
 
         public Childholder(View v) {
             shop_cart_item_cb = (CheckBox) v.findViewById(R.id.shop_cart_item_cb);
@@ -179,6 +220,8 @@ public class Test3Adapter extends CartExAdapter {
             shop_cart_item_reduce_tv = (TextView) v.findViewById(R.id.shop_cart_item_reduce_tv);
             shop_cart_item_number_tv = (TextView) v.findViewById(R.id.shop_cart_item_number_tv);
             shop_cart_item_add_tv = (TextView) v.findViewById(R.id.shop_cart_item_add_tv);
+            shop_cart_item_control_ll = v.findViewById(R.id.shop_cart_item_control_ll);
+            shop_cart_item_sold_out_icon = v.findViewById(R.id.shop_cart_item_sold_out_icon);
         }
     }
 

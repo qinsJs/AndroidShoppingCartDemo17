@@ -3,7 +3,8 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="96dp"
-                tools:background="#f1f1f1">
+                android:background="@android:color/white"
+    >
 
     <RelativeLayout
         android:id="@+id/a"
@@ -20,12 +21,12 @@
             />
 
         <ImageView
-            android:visibility="gone"
             android:id="@+id/shop_cart_item_sold_out_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            tools:src="@mipmap/ic_launcher"
+            android:visibility="visible"
+            android:src="@drawable/icon_shelves"
             />
 
     </RelativeLayout>
@@ -39,7 +40,7 @@
         android:layout_marginLeft="6dp"
         android:layout_toRightOf="@id/a"
         android:scaleType="centerCrop"
-        tools:src="@mipmap/ic_launcher"
+        android:src="@drawable/a"
         />
 
 
@@ -72,6 +73,7 @@
             />
 
         <LinearLayout
+            android:id="@+id/shop_cart_item_control_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

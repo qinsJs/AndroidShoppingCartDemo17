@@ -11,7 +11,9 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import walden.lib.cart.ShopCart;
 import walden.shoppingcart.demo.A;
@@ -127,6 +129,8 @@ public class Test3Activity extends Activity implements v, View.OnClickListener {
         freightTv.setOnClickListener(this);
         selectAllCb.setOnClickListener(this);
 
+        mListView.setGroupIndicator(null);
+
     }
 
 
@@ -140,7 +144,9 @@ public class Test3Activity extends Activity implements v, View.OnClickListener {
         // TODO: 2017/2/14 结算 ( 获取选中数量 )
         delTv.setText(R.string.settlement);
 
-        selectAllCb.setVisibility(View.VISIBLE);
+
+        findViewById(R.id.shop_cart_select_all_tv).setVisibility(View.GONE);
+        selectAllCb.setVisibility(View.GONE);
 
 
     }
@@ -154,7 +160,8 @@ public class Test3Activity extends Activity implements v, View.OnClickListener {
         titleTv.setText(R.string.complete);
         delTv.setText(R.string.delete);
 
-        selectAllCb.setVisibility(View.GONE);
+        selectAllCb.setVisibility(View.VISIBLE);
+        findViewById(R.id.shop_cart_select_all_tv).setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -182,6 +189,38 @@ public class Test3Activity extends Activity implements v, View.OnClickListener {
 
     @Override
     public void setData(List<ParsingServiceShopCart.DataBean.CommunityCartListBean> b) {
+
+        //模拟构建失效商品
+        ParsingServiceShopCart.DataBean.CommunityCartListBean failure = new ParsingServiceShopCart.DataBean.CommunityCartListBean();
+        failure.setShopCartId(UUID.randomUUID().toString());
+        failure.setCommunityName("失效商品");
+        List<ParsingServiceShopCart.DataBean.CommunityCartListBean.CartItemsBean> failureShop = new ArrayList<>();
+
+        //循环计算出失效的商品
+        for (ParsingServiceShopCart.DataBean.CommunityCartListBean cclb : b) {
+            for (ParsingServiceShopCart.DataBean.CommunityCartListBean.CartItemsBean dcclb : cclb.getCartItems()) {
+                if (dcclb.isFailure()) {
+                    failureShop.add(dcclb);
+                }
+            }
+        }
+
+        //循环移除失效商品
+        for (ParsingServiceShopCart.DataBean.CommunityCartListBean.CartItemsBean cib : failureShop) {
+            for (ParsingServiceShopCart.DataBean.CommunityCartListBean ccb : b) {
+                if (ccb.getCartItems().contains(cib)) {
+                    ccb.getCartItems().remove(cib);
+                    break;
+                }
+            }
+        }
+
+        if (failureShop.size() > 0) {
+            //最后添加失效商品
+            failure.setCartItems(failureShop);
+            b.add(failure);
+        }
+        //这堆逻辑有点伤心
 
         cart.loadCart(b);
         mAdapter = new Test3Adapter(this, cart);

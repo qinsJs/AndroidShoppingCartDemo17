@@ -54,7 +54,12 @@ public class ShopBean {
      */
     private int max_count = Integer.MAX_VALUE;
 
+    /**
+     * 商家的名字,母亲的脐带
+     */
     private String merchantsId;
+
+    private Object arg1;
 
     public ShopBean(IShopModel rules) {
         id = rules.giftId();
@@ -66,6 +71,7 @@ public class ShopBean {
         isFailure = rules.isFailure();
         min_count = rules.minCount();
         max_count = rules.maxCount();
+        arg1 = rules.arg1();
     }
 
     public synchronized void setCount(int count) {
@@ -151,5 +157,13 @@ public class ShopBean {
 
     public void setMerchantsId(String merchantsId) {
         this.merchantsId = merchantsId;
+    }
+
+    public Object getArg1() {
+        return arg1;
+    }
+
+    public void setArg1(Object arg1) {
+        this.arg1 = arg1;
     }
 }

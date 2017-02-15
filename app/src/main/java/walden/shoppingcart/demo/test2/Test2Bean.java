@@ -230,6 +230,11 @@ public class Test2Bean {
                 return Integer.valueOf(limitcount);
             }
 
+            @Override
+            public Object arg1() {
+                return null;
+            }
+
             public void syncData(ShopBean b) {
 
             }

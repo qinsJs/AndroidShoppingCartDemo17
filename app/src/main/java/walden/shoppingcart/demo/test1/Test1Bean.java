@@ -293,6 +293,11 @@ public class Test1Bean
 			return 1000;
 		}
 
+		@Override
+		public Object arg1() {
+			return null;
+		}
+
 		public void syncData(ShopBean b)
 		{
 			p_number = b.getCount() + "";

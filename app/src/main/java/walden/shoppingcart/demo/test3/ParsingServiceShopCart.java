@@ -439,6 +439,11 @@ public class ParsingServiceShopCart {
                     return Integer.MAX_VALUE;
                 }
 
+                @Override
+                public Object arg1() {
+                    return this;
+                }
+
                 public static class PriceBean {
                     /**
                      * amount : 0.01
