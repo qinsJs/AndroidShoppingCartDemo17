@@ -8,7 +8,7 @@
       "cent": 0,
       "currency": "CNY"
     },
-    "userId": "d64381f704dc4db08ea271565aa922aa",
+    "userId": "3b6723b9a58c4e6e9c64c69388e03546",
     "communityCartList": [
       {
         "mPrice": {
@@ -16,11 +16,47 @@
           "cent": 0,
           "currency": "CNY"
         },
-        "shopCartId": "6300a78b-ba95-11e6-99f8-000c2913e3a3",
+        "shopCartId": "f9f92ff5-d3b5-11e6-99f8-000c2913e3a3",
         "communityName": "欣欣想小区1",
         "mNum": 0,
         "communityId": "342f9ceb-ecfe-11e5-b2bd-0050562cb46c",
         "cartItems": [
+          {
+            "merchantId": "749d383c-ecb8-11e5-b2bd-0050562cb46c",
+            "price": {
+              "amount": 0.01,
+              "cent": 1,
+              "currency": "CNY"
+            },
+            "alarmNum": 10,
+            "num": 5,
+            "stockNum": 29,
+            "commodityId": "135afe00-bc56-11e6-99f8-000c2913e3a3",
+            "hImg": "2017-02-08/864e51ea-98ca-4cf5-a58d-47b2ffbc9271.jpg",
+            "activityLabel": null,
+            "commodityDesc": "  ",
+            "cartItemId": "a7de1401-f1c1-11e6-9146-000c2913e3a3",
+            "commodityName": "神经病",
+            "status": 0
+          },
+          {
+            "merchantId": "749d383c-ecb8-11e5-b2bd-0050562cb46c",
+            "price": {
+              "amount": 0.01,
+              "cent": 1,
+              "currency": "CNY"
+            },
+            "alarmNum": 10,
+            "num": 1,
+            "stockNum": 23,
+            "commodityId": "1129822c-bc56-11e6-99f8-000c2913e3a3",
+            "hImg": "2016-12-07/b16fb111-6b09-4514-ab04-c056ab16850e.jpg",
+            "activityLabel": null,
+            "commodityDesc": "safsafasfasfsaf ",
+            "cartItemId": "713fc335-f1cc-11e6-9146-000c2913e3a3",
+            "commodityName": "商品测试1",
+            "status": 0
+          },
           {
             "merchantId": "f957ac19-a70d-11e6-99f8-000c2913e3a3",
             "price": {
@@ -35,26 +71,26 @@
             "hImg": "2016-11-10/b57f9e1f-0844-47d7-9219-51a4c06ca322.png",
             "activityLabel": null,
             "commodityDesc": "公告",
-            "cartItemId": "b48481cd-d3d6-11e6-99f8-000c2913e3a3",
+            "cartItemId": "ca813f77-d64c-11e6-99f8-000c2913e3a3",
             "commodityName": "上衣",
             "status": 0
           },
           {
-            "merchantId": "4ec35b71-ecb8-11e5-b2bd-0050562cb46c",
+            "merchantId": "f957ac19-a70d-11e6-99f8-000c2913e3a3",
             "price": {
-              "amount": 0.01,
-              "cent": 1,
+              "amount": 20.00,
+              "cent": 2000,
               "currency": "CNY"
             },
             "alarmNum": 0,
             "num": 1,
-            "stockNum": 11,
-            "commodityId": "20562a55-8151-11e6-99f8-000c2913e3a3",
-            "hImg": "2016-08-08/d5f11ab8-884a-4f1e-b2c7-ba4534a0cb5c.jpg",
+            "stockNum": 19,
+            "commodityId": "7a3a4cec-a716-11e6-99f8-000c2913e3a3",
+            "hImg": "2016-11-10/693ffc07-1881-4356-bddb-2d4f04c96f05.png",
             "activityLabel": null,
-            "commodityDesc": "联通",
-            "cartItemId": "54d5ea6b-d3ba-11e6-99f8-000c2913e3a3",
-            "commodityName": "联通",
+            "commodityDesc": null,
+            "cartItemId": "d0c21a2a-d3b9-11e6-99f8-000c2913e3a3",
+            "commodityName": "连衣裙",
             "status": 0
           },
           {
@@ -66,50 +102,14 @@
             },
             "alarmNum": 10,
             "num": 1,
-            "stockNum": 10,
-            "commodityId": "12304811-bc56-11e6-99f8-000c2913e3a3",
-            "hImg": "2016-12-07/50f4de60-e929-473a-b3c6-7d2a9e41cf9d.jpg",
+            "stockNum": 0,
+            "commodityId": "76ce3d12-bc5a-11e6-99f8-000c2913e3a3",
+            "hImg": "2016-12-07/66987cef-6747-4fe4-916a-d18e52b65ba1.gif",
             "activityLabel": null,
-            "commodityDesc": null,
-            "cartItemId": "aead5da3-c372-11e6-99f8-000c2913e3a3",
-            "commodityName": "测试4",
-            "status": 1
-          },
-          {
-            "merchantId": "4ec35b71-ecb8-11e5-b2bd-0050562cb46c",
-            "price": {
-              "amount": 10.00,
-              "cent": 1000,
-              "currency": "CNY"
-            },
-            "alarmNum": 0,
-            "num": 3,
-            "stockNum": 21,
-            "commodityId": "1f29ab21-8151-11e6-99f8-000c2913e3a3",
-            "hImg": "2016-08-08/98cf205e-c5dc-46e2-9d20-baac8944be23.jpg",
-            "activityLabel": null,
-            "commodityDesc": "中国移不动萨嘎三个",
-            "cartItemId": "630102f4-ba95-11e6-99f8-000c2913e3a3",
-            "commodityName": "移动",
-            "status": 1
-          },
-          {
-            "merchantId": "4ec35b71-ecb8-11e5-b2bd-0050562cb46c",
-            "price": {
-              "amount": 0.01,
-              "cent": 1,
-              "currency": "CNY"
-            },
-            "alarmNum": 10,
-            "num": 2,
-            "stockNum": 6,
-            "commodityId": "213dd707-8151-11e6-99f8-000c2913e3a3",
-            "hImg": "2016-08-05/f3697911-9a1d-4350-ad0d-ca7db2bd7963small.jpg",
-            "activityLabel": null,
-            "commodityDesc": null,
-            "cartItemId": "659936cc-ba95-11e6-99f8-000c2913e3a3",
-            "commodityName": "aaaaaaaa",
-            "status": 1
+            "commodityDesc": "sfasfasf ",
+            "cartItemId": "f9f96882-d3b5-11e6-99f8-000c2913e3a3",
+            "commodityName": "新鲜的海鲜水果",
+            "status": 0
           }
         ]
       }

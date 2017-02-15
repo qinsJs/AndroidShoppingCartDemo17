@@ -3,7 +3,7 @@ package walden.shoppingcart.demo.test1;
 import java.util.List;
 
 import walden.lib.cart.model.ShopBean;
-import walden.lib.cart.usb.IServiceBean;
+import walden.lib.cart.usb.IShopModel;
 
 /**
  * Created by next on 17-1-19.
@@ -64,7 +64,7 @@ public class Test1Bean
 		this.Data = Data;
 	}
 
-	public static class DataBean implements IServiceBean
+	public static class DataBean implements IShopModel
 	{
 		/**
 		 * p_id : 84
@@ -293,7 +293,6 @@ public class Test1Bean
 			return 1000;
 		}
 
-		@Override
 		public void syncData(ShopBean b)
 		{
 			p_number = b.getCount() + "";

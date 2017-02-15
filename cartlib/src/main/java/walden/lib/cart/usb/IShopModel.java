@@ -1,13 +1,11 @@
 package walden.lib.cart.usb;
 
-import walden.lib.cart.model.ShopBean;
-
 /**
  * 服务器返回的 源数据 需要 则实现这个 interface
  * <p>
  * Created by next on 17-1-19.
  */
-public interface IServiceBean
+public interface IShopModel
 {
 
 	/**
@@ -73,10 +71,4 @@ public interface IServiceBean
 	 */
 	int maxCount();
 
-	/**
-	 * 同步数据
-	 *
-	 * @param b
-	 */
-	void syncData(ShopBean b);
 }

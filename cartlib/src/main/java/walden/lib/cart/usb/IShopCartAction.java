@@ -2,35 +2,32 @@ package walden.lib.cart.usb;
 
 import java.util.List;
 
-import walden.lib.cart.model.ShopCartModel;
+import walden.lib.cart.model.MerchantsBean;
 
 /**
  * Created by next on 17-1-19.
  */
 
-public interface IShopCartAction
-{
+public interface IShopCartAction {
 
-	void onCartErr(CartErrCode code);
+    void onCartErr(CartErrCode code);
 
-	enum CartErrCode
-	{
-		COUNT_LESS_THAN_1("商品数量小于1"),
-		OUT_OF_MIN_COUNT("商品数量小于下限"),
-		OUT_OF_MAX_COUNT("商品数量小于上限");
+    enum CartErrCode {
+        COUNT_LESS_THAN_1("商品数量小于1"),
+        OUT_OF_MIN_COUNT("商品数量小于下限"),
+        OUT_OF_MAX_COUNT("商品数量小于上限");
 
 
-		CartErrCode(String s)
-		{
-			introduce = s;
-		}
+        CartErrCode(String s) {
+            introduce = s;
+        }
 
-		public String introduce;
-	}
+        public String introduce;
+    }
 
 
-	void onGoodsChange(List<ShopCartModel> shopList);
+    void onGoodsChange(List<MerchantsBean> shopList);
 
-	void onCombinedChange(double combined, double fee);
+    void onCombinedChange(double combined, double fee);
 
 }
