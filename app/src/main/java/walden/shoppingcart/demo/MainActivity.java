@@ -6,6 +6,7 @@ import android.view.View;
 
 import walden.shoppingcart.demo.test1.Test1Activity;
 import walden.shoppingcart.demo.test2.Test2Activity;
+import walden.shoppingcart.demo.test3.Test3Activity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,5 +26,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void test3(View v) {
+        Test3Activity.toActivity(this);
     }
 }

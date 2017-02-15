@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shop_cart_title">我的购物车</string>
+    <string name="select_all">全选</string>
+    <string name="combined">合计:</string>
+    <string name="delete">删除</string>
+    <string name="settlement">结算</string>
+    <string name="editor">编辑</string>
+    <string name="complete">完成</string>
+    <string name="free_shipping">不含运费</string>
+</resources>

@@ -25,6 +25,8 @@
             android:label="@string/title_activity_test1"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
+        <activity android:name=".test3.Test3Activity"/>
     </application>
 
 </manifest>

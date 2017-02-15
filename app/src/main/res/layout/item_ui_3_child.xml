@@ -1,116 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                tools:background="#f1f1f1">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#CCCCCC" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:orientation="horizontal" >
+    <RelativeLayout
+        android:id="@+id/a"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="12dp"
+        >
 
         <CheckBox
-            android:id="@+id/item_shopping_car_check_box"
+            android:id="@+id/shop_cart_item_cb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="10dp"
-            android:button="@drawable/shopping_car_cbox_bg"
-            android:gravity="center"
-            android:visibility="visible" />
+            android:layout_centerInParent="true"
+            />
 
         <ImageView
-            android:id="@+id/iv_item_shopping_car_pic"
-            android:layout_width="95dp"
-            android:layout_height="95dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="13dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_launcher" />
-
-        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/shop_cart_item_sold_out_icon"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="12dp" >
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            tools:src="@mipmap/ic_launcher"
+            />
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/shop_cart_item_iv"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="6dp"
+        android:layout_toRightOf="@id/a"
+        android:scaleType="centerCrop"
+        tools:src="@mipmap/ic_launcher"
+        />
+
+
+    <!-- 信息部分,可能以后布局会有调整 -->
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/shop_cart_item_iv"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/shop_cart_item_name_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:textColor="@color/color_141414"
+            tools:text="asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd"
+            />
+
+        <TextView
+            android:id="@+id/shop_cart_item_price_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:minWidth="36dp"
+            android:text="¥0"
+            android:textColor="@android:color/holo_red_dark"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal"
+            >
 
             <TextView
-                android:id="@+id/tv_item_shopping_car_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="20dp"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:text="第八号当铺美女一枚"
-                android:textColor="#141414"
-                 />
+                android:id="@+id/shop_cart_item_reduce_tv"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/shopping_car_item_dec_bg"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="@color/color_666666"
+                android:textStyle="bold"/>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="30dp"
-                android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/shop_cart_item_number_tv"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/shopping_car_item_dec_bg"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="1"
+                android:textColor="@color/color_141414"
+                />
 
-                <TextView
-                    android:id="@+id/tv_item_shopping_car_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:singleLine="true"
-                    android:text="￥ 308.00"
-                    android:textColor="#fd5e78"
-                    android:textSize="15sp"
-                     />
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="15dp"
-                    android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/shop_cart_item_add_tv"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/shopping_car_item_dec_bg"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="@color/color_666666"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+    </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/tv_item_shopping_car_reduce"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:background="@drawable/shopping_car_item_dec_bg"
-                        android:gravity="center"
-                        android:text="一"
-                        android:textColor="#141414"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/tv_item_shopping_car_num"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:background="@drawable/shopping_car_item_dec_bg"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:hint="1"
-                        android:textColorHint="#141414"
-                        android:textColor="#141414"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/tv_item_shopping_car_add"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:background="@drawable/shopping_car_item_dec_bg"
-                        android:gravity="center"
-                        android:text="+"
-                        android:textColor="#141414"
-                        android:textSize="12sp" />
-                </LinearLayout>
-            </RelativeLayout>
-        </RelativeLayout>
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

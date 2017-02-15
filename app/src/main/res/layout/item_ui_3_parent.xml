@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#ffffff"
-    android:orientation="vertical" >
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="#ffffff"
+              android:orientation="vertical">
 
     <RelativeLayout
-        android:padding="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white" >
+        android:background="@android:color/white"
+        android:padding="15dp">
 
         <CheckBox
             android:id="@+id/item_shopping_car_check_box_parent"
@@ -18,23 +18,22 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="4dp"
-            android:button="@drawable/shopping_car_cbox_bg"
             android:gravity="center"
-            android:visibility="visible" />
+            android:visibility="visible"/>
 
         <TextView
-            android:layout_marginLeft="10dp"
             android:id="@+id/tv_item_shopping_car_parent_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/item_shopping_car_check_box_parent"
             android:background="@android:color/white"
             android:drawableLeft="@drawable/supermarket"
             android:drawablePadding="12dp"
             android:text="第八号当铺"
             android:textColor="#141414"
-            android:textSize="15sp" />
+            android:textSize="15sp"/>
     </RelativeLayout>
 
 </LinearLayout>

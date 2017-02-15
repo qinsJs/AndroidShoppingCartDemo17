@@ -1,5 +1,6 @@
 package walden.lib.cart;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -142,20 +143,23 @@ public class ShopCart implements ICart {
 
     @Override
     public double combined() {
-        double result = 0;
+        BigDecimal result = new BigDecimal("0");
 
         for (MerchantsBean mb : shoppingCartOfGoods) {
 
             for (ShopBean sb : mb.getShopList()) {
 
                 if (!canCombined(sb)) continue;
+
+                BigDecimal p = new BigDecimal(sb.getPrice() + "");
+                BigDecimal c = new BigDecimal(sb.getCount() + "");
                 //单间 * 数量
-                result += sb.getPrice() * sb.getCount();
+                result = result.add(p.multiply(c));
             }
 
         }
 
-        return result;
+        return result.doubleValue();
     }
 
     /**
@@ -177,17 +181,18 @@ public class ShopCart implements ICart {
 
     @Override
     public double fee() {
-        double result = 0;
+        BigDecimal result = new BigDecimal("0");
 
         for (MerchantsBean mb : shoppingCartOfGoods) {
 
             for (ShopBean sb : mb.getShopList()) {
                 if (!canCombined(sb)) continue;
-                result += sb.getFee();
+                BigDecimal f = new BigDecimal(sb.getFee() + "");
+                result = result.add(f);
             }
         }
 
-        return result;
+        return result.doubleValue();
     }
 
     @Override
